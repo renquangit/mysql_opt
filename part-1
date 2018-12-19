@@ -1,0 +1,33 @@
+MYSQL 逻辑分层：
+--连接层： 提供与客户端的服务
+--服务层： 1.提供各种用户使用的接口（select......）
+		 2.提供SQL优化器
+--引擎层： InnoDB： 事务优先 适合高并发操作；行锁
+		 MyISAM: 性能优先；表锁
+--存储层: 存储数据
+
+查询数据库引擎：
+	1.查询数据支持那些引擎： show engines；
+	2.查看当前使用的引擎： show variables like '%storage_engine%';
+	3.指定数据库对象的引擎：
+	create table tb(
+			id int(4) auto_increment,
+			name varchar(5),
+			sept varchar(5),
+			primary key(id)
+			) ENGINE=MyISAM AUTO_INCREMENT=1
+			DEFAULT CHARSET=utf8;
+3.SQL优化
+	原因：性能低，执行时间长，等待时间太长，SQL语句欠佳（尤其是连接查询），索引失效，服务器参数设置不合理（缓冲区，线程数）
+		a.SQL：
+			编写过程：
+				select .. from ..join...on... where ...group by...having.... order by.... limit..
+			解析过程：
+				。。。。。。。。。。。。。。。。。。
+			参考连接：https://blog.csdn.net/eagle89/article/details/80829486
+		b.SQL优化 主要是在于 优化索引
+			索引：相当于书的目录
+			索引：索引是帮助mysql高效查询数据的 数据结构。索引是数据结构（树：B树（默认），hash树）
+			索引的弊端：1.索引本身很大，可以存放在内存（硬盘）中
+					 2.
+			
